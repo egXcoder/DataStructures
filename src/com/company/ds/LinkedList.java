@@ -1,6 +1,9 @@
 package com.company.ds;
 
-public class LinkedList<E> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedList<E> implements Iterable<E> {
     private class Node<E>{
         E data;
         Node<E> next;
@@ -180,5 +183,27 @@ public class LinkedList<E> {
      */
     public int getCurrentSize(){
         return currentSize;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return (new Iterator<E>() {
+            private Node<E> N = head;
+
+            @Override
+            public boolean hasNext() {
+                return (N.next != null);
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                E data = N.data;
+                N = N.next;
+                return data;
+            }
+        });
     }
 }

@@ -175,4 +175,18 @@ class LinkedListTest {
         LinkedList l = new LinkedList();
         assertNull(l.peekLast());
     }
+
+    @Test
+    void iterateOverLinkedList() {
+        LinkedList l = new LinkedList();
+        l.addLast("test1");
+        l.addLast("test2");
+        l.addLast("test3");
+        l.addLast("test4");
+        int counter=0;
+        for(Object E:l){
+            counter++;
+        }
+        assertEquals(counter,3);
+    }
 }
