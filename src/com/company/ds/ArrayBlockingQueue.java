@@ -1,11 +1,14 @@
 package com.company.ds;
 
-public class QueueCircularArray<E> {
+public class ArrayBlockingQueue<E> {
     private Object[] array;
     private int read=0,write=0;
-    private int usedSize = 0;
+    private int count = 0;
 
-    public QueueCircularArray(int size){
+    public ArrayBlockingQueue(int size){
+        if(size<=1){
+            throw new IllegalArgumentException();
+        }
         array = new Object[size];
     }
 
@@ -16,7 +19,7 @@ public class QueueCircularArray<E> {
 
         array[write] = elem;
         write = (write+1) % array.length;
-        usedSize++;
+        count++;
     }
 
     public E dequeue() throws Exception{
@@ -26,12 +29,12 @@ public class QueueCircularArray<E> {
 
         E data = (E) array[read];
         read=(read+1) % array.length;
-        usedSize--;
+        count--;
         return data;
     }
 
-    public int getUsedSize(){
-        return usedSize;
+    public int getCount(){
+        return count;
     }
 
 }

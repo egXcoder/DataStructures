@@ -1,25 +1,25 @@
 package com.company.test;
 
-import com.company.ds.QueueCircularArray;
+import com.company.ds.ArrayBlockingQueue;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class QueueCircularArrayTest {
+public class ArrayBlockingQueueTest {
     @Test
     public void checkEnqueue(){
-        QueueCircularArray q = new QueueCircularArray(10);
+        ArrayBlockingQueue q = new ArrayBlockingQueue(10);
         try {
             q.enqueue(10);
         }catch (Exception ex){
 
         }
 
-        assertEquals(q.getUsedSize(),1);
+        assertEquals(q.getCount(),1);
     }
 
     @Test
     public void checkEnqueueOnFullList(){
-        QueueCircularArray q = new QueueCircularArray(2);
+        ArrayBlockingQueue q = new ArrayBlockingQueue(2);
         try {
             q.enqueue(10);
         }catch (Exception ex){
@@ -30,12 +30,12 @@ public class QueueCircularArrayTest {
             q.enqueue(22);
         });
 
-        assertEquals(q.getUsedSize(),1);
+        assertEquals(q.getCount(),1);
     }
 
     @Test
     public void checkDequeue(){
-        QueueCircularArray<Integer> q = new QueueCircularArray(10);
+        ArrayBlockingQueue<Integer> q = new ArrayBlockingQueue(10);
         int data =0;
         try {
             q.enqueue(1);
@@ -51,7 +51,7 @@ public class QueueCircularArrayTest {
 
     @Test
     public void checkDequeueOnEmptyList(){
-        QueueCircularArray q = new QueueCircularArray(2);
+        ArrayBlockingQueue q = new ArrayBlockingQueue(2);
 
         assertThrows(Exception.class,()->{
             q.dequeue();
