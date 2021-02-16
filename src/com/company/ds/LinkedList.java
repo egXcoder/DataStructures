@@ -3,7 +3,7 @@ package com.company.ds;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedList<E> implements Iterable<E> {
+public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
     private class Node<E>{
         E data;
         Node<E> next;
@@ -177,6 +177,15 @@ public class LinkedList<E> implements Iterable<E> {
         return tail.data;
     }
 
+    public E find(E data){
+        for(E el:this){
+            if(((Comparable<E>) el).compareTo(data) == 0){
+                return el;
+            }
+        }
+        return null;
+    }
+
     /**
      * get current size of linkedlist
      * @return
@@ -206,4 +215,5 @@ public class LinkedList<E> implements Iterable<E> {
             }
         });
     }
+
 }

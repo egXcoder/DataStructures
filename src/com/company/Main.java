@@ -7,8 +7,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-	    // write your code here
-        ArrayDeque d = new ArrayDeque();
-        d.addLast("hello");
+        // write your code here
+//        System.out.println(o.y);
     }
 }
