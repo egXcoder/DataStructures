@@ -23,4 +23,17 @@ public class SimpleBinaryTreeTest {
         assertTrue(bt.contains(11));
         assertFalse(bt.contains(1234));
     }
+
+    @Test
+    public void removeFromBinaryTree(){
+        SimpleBinaryTree<Integer> bt = new SimpleBinaryTree<Integer>();
+        bt.add(11);
+        bt.add(22);
+        bt.add(33);
+        assertTrue(bt.remove(11));
+        assertFalse(bt.contains(11));
+        assertTrue(bt.remove(22));
+        assertFalse(bt.contains(22));
+        assertEquals(1,bt.getCount());
+    }
 }
