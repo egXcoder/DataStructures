@@ -21,34 +21,38 @@ public class SimpleBinaryTree<E extends Comparable<E>> {
     }
 
 
-    public void add(E obj){
+    public boolean add(E obj){
         if(root==null){
             root = new Node<E>(obj);
             elementCounter++;
-            return;
+            return true;
         }
 
-        add(obj,root);
-        elementCounter++;
+        if(add(obj,root)){
+            elementCounter++;
+            return true;
+        }
+
+        return false;
     }
 
-    private void add(E obj,Node<E> pos){
-        if(pos==null){
-            return;
+    private boolean add(E obj,Node<E> node){
+        if(node==null){
+            return false;
         }
 
-        if(obj.compareTo(pos.data)>0){
-            if(pos.right==null){
-                pos.right = new Node<E>(obj);
-                return;
+        if(obj.compareTo(node.data)>0){
+            if(node.right==null){
+                node.right = new Node<E>(obj);
+                return true;
             }
-            add(obj,pos.right);
+            return add(obj,node.right);
         }else{
-            if(pos.left==null){
-                pos.left = new Node<E>(obj);
-                return;
+            if(node.left==null){
+                node.left = new Node<E>(obj);
+                return true;
             }
-            add(obj,pos.left);
+            return add(obj,node.left);
         }
     }
 
@@ -56,19 +60,19 @@ public class SimpleBinaryTree<E extends Comparable<E>> {
         return contains(obj,root);
     }
 
-    private boolean contains(E obj,Node<E> pos){
-        if(pos == null){
+    private boolean contains(E obj,Node<E> node){
+        if(node == null){
             return false;
         }
 
-        if(obj.compareTo(pos.data)==0){
+        if(obj.compareTo(node.data)==0){
             return true;
         }
 
-        if(obj.compareTo(pos.data)>0){
-            return contains(obj,pos.right);
+        if(obj.compareTo(node.data)>0){
+            return contains(obj,node.right);
         }else{
-            return contains(obj,pos.left);
+            return contains(obj,node.left);
         }
     }
 

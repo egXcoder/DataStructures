@@ -5,17 +5,20 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        // write your code here
-//        System.out.println(o.y);
-        double num = 100;
+        boolean var;
+        long startTime = System.nanoTime();
+        for(int i=0;i<100000;i++){
+            var = (2131412311>0);
+        }
+        System.out.println(System.nanoTime()-startTime);
+        startTime = System.nanoTime();
+        for(int i=0;i<100000;i++){
+            var = ((2131412311&1)>0);
+        }
+        System.out.println(System.nanoTime()-startTime);
+    }
 
-
-
-
-        double multi = 1;
-       for(int i=1;i<num+1;i++){
-           multi*=i;
-       }
-       System.out.println(multi);
+    private static void test(int[] x){
+        x[0] = 123;
     }
 }
