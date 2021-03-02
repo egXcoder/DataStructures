@@ -11,34 +11,38 @@ package com.company.ds;
  * @param <E>
  */
 public class MaxHeap<E extends Comparable<E>> {
-    private int nextPosition;
     private E[] hArray;
-    private int elementsCounter;
+    private int nextPosition;
+    private int numberOfElementsInHeap;
+    private static final int DEFAULT_Capacity = 11;
+
+    public MaxHeap(){
+        this(DEFAULT_Capacity);
+    }
 
     public MaxHeap(int size){
         if(size<=1){
             throw new IllegalArgumentException("size must be greater than 1");
         }
 
-        elementsCounter=0;
+        numberOfElementsInHeap = 0;
         nextPosition = 0;
         hArray = (E[]) new Comparable[size];
     }
 
-    public void add(E element) throws Exception{
+    public void add(E element){
         if(nextPosition>=hArray.length){
-            throw new Exception("Heap is full");
+            throw new RuntimeException("Heap is full");
         }
 
         hArray[nextPosition] = element;
         trickleUp(nextPosition);
         nextPosition++;
-        elementsCounter++;
+        numberOfElementsInHeap++;
     }
 
     private void trickleUp(int childIndex){
-        if(childIndex==0){
-            //we reached root
+        if(isRoot(childIndex)){
             return;
         }
 
@@ -49,64 +53,74 @@ public class MaxHeap<E extends Comparable<E>> {
         }
     }
 
-    public E poll() throws Exception{
-        if(elementsCounter==0){
-            throw new Exception("Heap is empty");
+    private boolean isRoot(int index){
+        return index==0;
+    }
+
+    public E poll(){
+        if(numberOfElementsInHeap == 0){
+            throw new RuntimeException("Heap is empty");
         }
 
         E rootElement = hArray[0];
         hArray[0] = null;
         swap(--nextPosition,0);
         trickleDown(0);
-        elementsCounter--;
+        numberOfElementsInHeap--;
         return rootElement;
     }
 
     private void trickleDown(int parentIndex){
-        int leftIndex = parentIndex*2+1;
-        int rightIndex = parentIndex*2+2;
+        int leftIndex = 2*parentIndex+1;
+        int rightIndex = 2*parentIndex+2;
 
-        // edge Cases:
-        if(rightIndex==nextPosition){
-            //parent doesn't have right child
+        if(isParentHaveOnlyLeftChild(parentIndex)){
             if(hArray[parentIndex].compareTo(hArray[leftIndex])<0){
                 swap(parentIndex,leftIndex);
                 return;
             }
         }
 
-        if(leftIndex==nextPosition){
-            //parent doesn't have left or right childs
+        if(isParentDontHaveAnyChildren(parentIndex)){
             return;
         }
 
-        // typical logic:
-        int left_right_comparsion = hArray[leftIndex].compareTo(hArray[rightIndex]);
-        int largetIndex=-1;
-        if(left_right_comparsion>0){
-            //left is bigger than right
-            largetIndex=leftIndex;
-        }else if(left_right_comparsion<0){
-            largetIndex=rightIndex;
-            //right is bigger than left
-        }
-        if(largetIndex!=-1){
-            if(hArray[parentIndex].compareTo(hArray[largetIndex])<1){
-                swap(parentIndex,largetIndex);
-                trickleDown(largetIndex);
-            }
+        if(isLeftChildBiggerThanRightChild(parentIndex)){
+            swap(parentIndex,leftIndex);
+            trickleDown(leftIndex);
+        }else{
+            swap(parentIndex,rightIndex);
+            trickleDown(rightIndex);
         }
     }
 
-    public int getCounter(){
-        return elementsCounter;
+    private boolean isParentHaveOnlyLeftChild(int parentIndex){
+        int rightIndex = 2*parentIndex+2;
+        return rightIndex==nextPosition;
+    }
+
+    private boolean isParentDontHaveAnyChildren(int parentIndex){
+        int leftIndex = 2*parentIndex+1;
+        return leftIndex>=nextPosition;
+    }
+
+    private boolean isLeftChildBiggerThanRightChild(int parentIndex){
+        if(isParentDontHaveAnyChildren(parentIndex)){
+            throw new RuntimeException("Parent Index Dont have any children");
+        }
+
+        int leftIndex = 2*parentIndex+1;
+        int rightIndex = 2*parentIndex+2;
+        return (hArray[leftIndex].compareTo(hArray[rightIndex])>0);
+    }
+
+    public int getSize(){
+        return numberOfElementsInHeap;
     }
 
     private void swap(int firstIndex,int secondIndex){
         E firstElement = hArray[firstIndex];
-        E secondElement = hArray[secondIndex];
-
-        hArray[firstIndex] = secondElement;
+        hArray[firstIndex] = hArray[secondIndex];
         hArray[secondIndex] = firstElement;
     }
 }

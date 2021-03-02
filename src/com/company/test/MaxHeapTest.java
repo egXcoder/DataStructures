@@ -9,23 +9,19 @@ public class MaxHeapTest {
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
         mx = new MaxHeap<Integer>(8);
-        try{
-            mx.add(2);
-            mx.add(3);
-            mx.add(21);
-            mx.add(4);
-            mx.add(1);
-            mx.add(3);
-            mx.add(9);
-            mx.add(13);
-        }catch (Exception ex){
-
-        }
+        mx.add(2);
+        mx.add(3);
+        mx.add(21);
+        mx.add(4);
+        mx.add(1);
+        mx.add(3);
+        mx.add(9);
+        mx.add(13);
     }
 
     @Test
     public void checkElementCounter(){
-        assertEquals(mx.getCounter(),8);
+        assertEquals(mx.getSize(),8);
     }
 
     @Test
@@ -37,14 +33,9 @@ public class MaxHeapTest {
 
     @Test
     public void pollTheRoot(){
-       try{
-           assertEquals(21,mx.poll());
-           assertEquals(13,mx.poll());
-           assertEquals(9,mx.poll());
-           assertEquals(4,mx.poll());
-       }catch (Exception ex){
-
-       }
-
+       assertEquals(21,mx.poll());
+       assertEquals(13,mx.poll());
+       assertEquals(9,mx.poll());
+       assertEquals(4,mx.poll());
     }
 }
