@@ -1,26 +1,35 @@
 package com.company.ds;
 
+import java.util.Comparator;
+
 /**
  * It’s a type of tree, in which we are always have the
  * - ability to reach the maximum value of all the elements with O(1) complexity .. MAX HEAP
  * - ability to reach the minimum value of all elements with O(1) complexity .. Min Heap
  *
  * add to a tree is O(logn)
- * poll from a tree is O(logn) , its always going to remove the maximum priority and resort the heap
- * Heap sort operation is to get all elements sorted O(nlog(n))
- * @param <E>
+ * poll from a tree is O(logn)
+ *
+ * if given comparator it will use it to sort the elements, if not given, Heap will use the default
+ * elements comparator method
  */
-public class MaxHeap<E extends Comparable<E>> {
-    private E[] hArray;
+public class Heap<E extends Comparable<E>> {
+    private final E[] hArray;
     private int nextPosition;
     private int numberOfElementsInHeap;
     private static final int DEFAULT_Capacity = 11;
+    private Comparator<E> comparator;
 
-    public MaxHeap(){
+    public Heap(){
         this(DEFAULT_Capacity);
     }
 
-    public MaxHeap(int size){
+    public Heap(int size, Comparator<E> comparator) {
+        this(size);
+        this.comparator = comparator;
+    }
+
+    public Heap(int size){
         if(size<=1){
             throw new IllegalArgumentException("size must be greater than 1");
         }
@@ -47,9 +56,17 @@ public class MaxHeap<E extends Comparable<E>> {
         }
 
         int parentIndex =  (childIndex-1)/2;
-        if((hArray[childIndex]).compareTo(hArray[parentIndex]) > 0){
+        if(compareTwoElements(childIndex,parentIndex) < 0){
             swap(childIndex,parentIndex);
             trickleUp(parentIndex);
+        }
+    }
+
+    private int compareTwoElements(int firstIndex,int secondIndex){
+        if(comparator==null){
+            return hArray[firstIndex].compareTo(hArray[secondIndex]);
+        }else{
+            return comparator.compare(hArray[firstIndex],hArray[secondIndex]);
         }
     }
 
@@ -75,7 +92,7 @@ public class MaxHeap<E extends Comparable<E>> {
         int rightIndex = 2*parentIndex+2;
 
         if(isParentHaveOnlyLeftChild(parentIndex)){
-            if(hArray[parentIndex].compareTo(hArray[leftIndex])<0){
+            if(compareTwoElements(parentIndex,leftIndex)>0){
                 swap(parentIndex,leftIndex);
             }
             return;
@@ -85,7 +102,7 @@ public class MaxHeap<E extends Comparable<E>> {
             return;
         }
 
-        if(isLeftChildBiggerThanRightChild(parentIndex)){
+        if(compareLeftAndRightChildren(parentIndex)<0){
             swap(parentIndex,leftIndex);
             trickleDown(leftIndex);
         }else{
@@ -104,14 +121,14 @@ public class MaxHeap<E extends Comparable<E>> {
         return leftIndex>=nextPosition;
     }
 
-    private boolean isLeftChildBiggerThanRightChild(int parentIndex){
+    private int compareLeftAndRightChildren(int parentIndex){
         if(isParentDontHaveAnyChildren(parentIndex)){
             throw new RuntimeException("Parent Index Dont have any children");
         }
 
         int leftIndex = 2*parentIndex+1;
         int rightIndex = 2*parentIndex+2;
-        return (hArray[leftIndex].compareTo(hArray[rightIndex])>0);
+        return compareTwoElements(leftIndex,rightIndex);
     }
 
     public int getSize(){
