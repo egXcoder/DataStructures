@@ -77,8 +77,8 @@ public class MaxHeap<E extends Comparable<E>> {
         if(isParentHaveOnlyLeftChild(parentIndex)){
             if(hArray[parentIndex].compareTo(hArray[leftIndex])<0){
                 swap(parentIndex,leftIndex);
-                return;
             }
+            return;
         }
 
         if(isParentDontHaveAnyChildren(parentIndex)){
@@ -122,5 +122,13 @@ public class MaxHeap<E extends Comparable<E>> {
         E firstElement = hArray[firstIndex];
         hArray[firstIndex] = hArray[secondIndex];
         hArray[secondIndex] = firstElement;
+    }
+
+    public E peek(){
+        if(numberOfElementsInHeap==0){
+            throw new RuntimeException("Heap is empty");
+        }
+
+        return hArray[0];
     }
 }
