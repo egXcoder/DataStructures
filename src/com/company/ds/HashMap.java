@@ -41,7 +41,7 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
 
     public boolean add(K key,V value){
         if(loadFactor()>MAX_LOAD_FACTOR){
-            resize();
+            resize(tableSize*2+1);
         }
 
         //wrap k,v in Hashelement
@@ -76,23 +76,20 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
         return null;
     }
 
-    public void resize(){
-        int newTableSize = tableSize*2;
-
-        //create new hArray with double the size
+    public void resize(int newTableSize){
         LinkedList<HashElement<K,V>>[] newHArray = (LinkedList<HashElement<K,V>> []) new LinkedList[newTableSize];
 
-        //initiatlize each of element with linkedlist object
         for (int i=0;i<newTableSize;i++){
             newHArray[i] = new LinkedList<HashElement<K,V>>();
         }
 
-        for(K key:this){
-            newHArray[getIndexOfKeyByTableSize(key,newTableSize)].addLast(
-                    new HashElement<K,V>(key,getValue(key))
-            );
+        for(int i=0;i<tableSize;i++){
+            for(HashElement<K,V> hashElement:hArray[i]){
+                newHArray[getIndexOfKeyByTableSize(hashElement.key, newTableSize)].addLast(hashElement);
+            }
         }
-        tableSize=newTableSize;
+
+        tableSize = newTableSize;
         hArray = newHArray;
     }
 
