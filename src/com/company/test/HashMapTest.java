@@ -51,4 +51,14 @@ public class HashMapTest {
         assertEquals(2,map.getValue("second"));
         assertNull(map.getValue("fourth"));
     }
+
+    @Test
+    public void noDuplicationKeys(){
+        HashMap<String , Integer> map = new HashMap<String,Integer>();
+        map.add("first",1);
+        map.add("first",2);
+        assertEquals(2,map.getValue("first"));
+        assertTrue(map.remove("first"));
+        assertFalse(map.remove("first"));
+    }
 }
