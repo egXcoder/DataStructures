@@ -57,6 +57,11 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
         numOfElements--;
     }
 
+    public boolean Contains(K key){
+        return this.hArray[getIndexOfKeyByTableSize(key,tableSize)]
+                .find(new HashElement<K,V>(key,null)) != null;
+    }
+
     public V getValue(K key){
         HashElement<K,V> found = this.hArray[getIndexOfKeyByTableSize(key,tableSize)]
                 .find(new HashElement<K,V>(key,null));
@@ -67,6 +72,7 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
 
         return null;
     }
+
 
     public void resize(int newTableSize){
         LinkedList<HashElement<K,V>>[] newHArray = (LinkedList<HashElement<K,V>> []) new LinkedList[newTableSize];
@@ -97,6 +103,10 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
 
     private int getAbsoluteValueOfHashCode(int hashCode){
         return hashCode & 0x7FFFFFFF;
+    }
+
+    public int getNumOfElements(){
+        return numOfElements;
     }
 
     @Override
