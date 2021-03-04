@@ -20,4 +20,14 @@ public class HashMapTest {
         map.add("third",3);
         assertEquals(3,map.getNumOfElements());
     }
+
+    @Test
+    public void checkContainsElementsOnHashMap(){
+        HashMap<String , Integer> map = new HashMap<String,Integer>();
+        map.add("first",1);
+        map.add("second",2);
+        map.add("third",3);
+        assertTrue(map.contains("first"));
+        assertFalse(map.contains("fourth"));
+    }
 }

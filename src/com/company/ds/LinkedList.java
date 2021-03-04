@@ -196,24 +196,30 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return (new Iterator<E>() {
-            private Node<E> N = head;
+        return new IteratorHelper<E>();
+    }
 
-            @Override
-            public boolean hasNext() {
-                return (N.next != null);
-            }
+    private class IteratorHelper<T> implements Iterator<T>{
+        private Node<E> node;
 
-            @Override
-            public E next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                E data = N.data;
-                N = N.next;
-                return data;
+        public IteratorHelper(){
+            node = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return node != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
             }
-        });
+            E data = node.data;
+            node = node.next;
+            return (T) data;
+        }
     }
 
 }

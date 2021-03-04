@@ -57,7 +57,7 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
         numOfElements--;
     }
 
-    public boolean Contains(K key){
+    public boolean contains(K key){
         return this.hArray[getIndexOfKeyByTableSize(key,tableSize)]
                 .find(new HashElement<K,V>(key,null)) != null;
     }
