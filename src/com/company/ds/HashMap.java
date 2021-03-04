@@ -44,8 +44,15 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
             resize(tableSize*2+1);
         }
 
-        this.hArray[getIndexOfKeyByTableSize(key,tableSize)]
-                .addLast(new HashElement<K,V>(key,value));
+        LinkedList<HashElement<K,V>> linkedList = this.hArray[getIndexOfKeyByTableSize(key,tableSize)];
+        for(HashElement<K,V> hashElement:linkedList){
+            if(hashElement.key == key){
+                hashElement.value = value;
+                return;
+            }
+        }
+
+        linkedList.addLast(new HashElement<K,V>(key,value));
 
         numOfElements++;
     }
