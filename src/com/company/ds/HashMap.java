@@ -39,7 +39,7 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
         this.tableSize=tableSize;
     }
 
-    public void add(K key,V value){
+    public void put(K key, V value){
         if(loadFactor()>MAX_LOAD_FACTOR){
             resize(tableSize*2+1);
         }

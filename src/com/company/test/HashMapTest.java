@@ -15,18 +15,18 @@ public class HashMapTest {
     @Test
     public void addElements(){
         HashMap<String , Integer> map = new HashMap<String,Integer>();
-        map.add("first",1);
-        map.add("second",2);
-        map.add("third",3);
+        map.put("first",1);
+        map.put("second",2);
+        map.put("third",3);
         assertEquals(3,map.getNumOfElements());
     }
 
     @Test
     public void checkContainsElements(){
         HashMap<String , Integer> map = new HashMap<String,Integer>();
-        map.add("first",1);
-        map.add("second",2);
-        map.add("third",3);
+        map.put("first",1);
+        map.put("second",2);
+        map.put("third",3);
         assertTrue(map.contains("first"));
         assertFalse(map.contains("fourth"));
     }
@@ -34,9 +34,9 @@ public class HashMapTest {
     @Test
     public void removeElements(){
         HashMap<String , Integer> map = new HashMap<String,Integer>();
-        map.add("first",1);
-        map.add("second",2);
-        map.add("third",3);
+        map.put("first",1);
+        map.put("second",2);
+        map.put("third",3);
         assertTrue(map.remove("first"));
         assertFalse(map.remove("first"));
     }
@@ -44,9 +44,9 @@ public class HashMapTest {
     @Test
     public void getValue(){
         HashMap<String , Integer> map = new HashMap<String,Integer>();
-        map.add("first",1);
-        map.add("second",2);
-        map.add("third",3);
+        map.put("first",1);
+        map.put("second",2);
+        map.put("third",3);
         assertEquals(1,map.getValue("first"));
         assertEquals(2,map.getValue("second"));
         assertNull(map.getValue("fourth"));
@@ -55,8 +55,8 @@ public class HashMapTest {
     @Test
     public void noDuplicationKeys(){
         HashMap<String , Integer> map = new HashMap<String,Integer>();
-        map.add("first",1);
-        map.add("first",2);
+        map.put("first",1);
+        map.put("first",2);
         assertEquals(2,map.getValue("first"));
         assertTrue(map.remove("first"));
         assertFalse(map.remove("first"));
