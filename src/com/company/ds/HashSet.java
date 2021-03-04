@@ -26,25 +26,8 @@ public class HashSet<K extends Comparable<K>> implements Iterable<K> {
         return hashMap.remove(element);
     }
 
-
     @Override
     public Iterator<K> iterator() {
-        return null;
-    }
-
-    private class ItertatorHelper<T> implements Iterator<T>{
-        private K[] keys;
-        public ItertatorHelper(){
-
-        }
-        @Override
-        public boolean hasNext() {
-            return false;
-        }
-
-        @Override
-        public T next() {
-            return null;
-        }
+        return hashMap.keySet().iterator();
     }
 }

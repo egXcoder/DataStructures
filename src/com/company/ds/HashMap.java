@@ -2,7 +2,7 @@ package com.company.ds;
 
 import java.util.Iterator;
 
-public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
+public class HashMap <K extends Comparable<K>,V>{
     private static class HashElement<K extends Comparable<K>,V> implements Comparable<HashElement<K,V>>{
         K key;
         V value;
@@ -121,36 +121,46 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
         return numOfElements;
     }
 
-    @Override
-    public Iterator<K> iterator() {
-        return new IteratorHelper<K>();
+    public KeySet<K> keySet(){
+        return new KeySet<K>();
     }
 
-    private class IteratorHelper<T> implements Iterator<T>{
-        T[] keys;
-        int position;
+    class KeySet<K> implements Iterable<K>{
+        public boolean contains(K key){
+            return contains(key);
+        }
+        @Override
+        public Iterator<K> iterator() {
+            return new KeyIterator<K>();
+        }
+    }
 
-        public IteratorHelper(){
-            keys = (T[]) new Object[numOfElements];
+    private final class KeyIterator<T> implements Iterator<T>{
+        private K[] keys;
+        private int position;
+        public KeyIterator(){
+            keys = (K[]) new Object[numOfElements];
+
+            int j=0;
             for(int i=0;i<tableSize;i++){
-                for(HashElement<K,V> he : hArray[i]){
-                    keys[position++] = (T) he.key;
+                for(HashElement<K,V> hashElement:hArray[i]){
+                  keys[j++] = hashElement.key;
                 }
             }
-            position = 0;
-        }
 
+            position=0;
+        }
         @Override
         public boolean hasNext() {
-            return position<keys.length;
+            return position< keys.length;
         }
 
         @Override
         public T next() {
-           if(!hasNext())
-               return null;
-
-           return keys[position++];
+            if(!hasNext()){
+                return null;
+            }
+            return (T) keys[position++];
         }
     }
 }
