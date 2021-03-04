@@ -3,7 +3,7 @@ package com.company.ds;
 import java.util.Iterator;
 
 public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
-    private class HashElement<K,V> implements Comparable<HashElement<K,V>>{
+    private static class HashElement<K extends Comparable<K>,V> implements Comparable<HashElement<K,V>>{
         K key;
         V value;
         public HashElement(K key,V value){
@@ -11,28 +11,32 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
             this.value=value;
         }
 
-
         @Override
-        public int compareTo(HashElement<K,V> he) {
-            return ((Comparable<K>) this.key).compareTo(he.key);
+        public int compareTo(HashElement<K,V> hashElement) {
+            return (key).compareTo(hashElement.key);
         }
     }
 
     LinkedList<HashElement<K,V>>[] hArray;
     int numOfElements;
     int tableSize;
-    private static final double MAX_LOAD_FACTOR = 0.8;
+    private static final double MAX_LOAD_FACTOR = 0.75;
+    private static final int DEFAULT_TABLE_SIZE = 11;
+
+    public HashMap(){
+        this(DEFAULT_TABLE_SIZE);
+    }
 
     public HashMap(int tableSize){
         if(tableSize<1){
-            throw new IllegalArgumentException("Hash Map Size should be greater than 1");
+            throw new IllegalArgumentException("Hash Map Size should be at least one");
         }
         hArray = (LinkedList<HashElement<K,V>> []) new LinkedList[tableSize];
         for (int i=0;i<tableSize;i++){
             hArray[i] = new LinkedList<HashElement<K,V>>();
         }
         numOfElements = 0;
-        this.tableSize=0;
+        this.tableSize=tableSize;
     }
 
     public boolean add(K key,V value){
