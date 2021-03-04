@@ -13,7 +13,7 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
 
         @Override
         public int compareTo(HashElement<K,V> hashElement) {
-            return (key).compareTo(hashElement.key);
+            return key.compareTo(hashElement.key);
         }
     }
 
@@ -44,20 +44,17 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
             resize(tableSize*2+1);
         }
 
-        this.hArray[getIndexOfKeyByTableSize(key,tableSize)].addLast(new HashElement<K,V>(key,value));
+        this.hArray[getIndexOfKeyByTableSize(key,tableSize)]
+                .addLast(new HashElement<K,V>(key,value));
+
         numOfElements++;
     }
 
-    public boolean remove(K key){
-        //wrap k,v in HashElement, we passed value as null
-        HashElement<K,V> he = new HashElement<K,V>(key,null);
-        //get index of key then get linkedlist at index
-        LinkedList<HashElement<K,V>> l = this.hArray[getIndexOfKeyByTableSize(key,tableSize)];
-        //remove from linkedlist, when linkedlist tried to remove, it will call the compareTo on the HashElement
-        //HashElement compare to is totally depend on the key, so its value can be null and it won't affect the logic
-        l.remove(he);
+    public void remove(K key){
+        this.hArray[getIndexOfKeyByTableSize(key,tableSize)]
+                .remove(new HashElement<K,V>(key,null));
+
         numOfElements--;
-        return true;
     }
 
     public V getValue(K key){
