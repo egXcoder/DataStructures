@@ -39,19 +39,13 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
         this.tableSize=tableSize;
     }
 
-    public boolean add(K key,V value){
+    public void add(K key,V value){
         if(loadFactor()>MAX_LOAD_FACTOR){
             resize(tableSize*2+1);
         }
 
-        //wrap k,v in Hashelement
-        HashElement<K,V> he = new HashElement<K,V>(key,value);
-        //get index of key then get linkedlist at index
-        LinkedList<HashElement<K,V>> l = this.hArray[getIndexOfKeyByTableSize(key,tableSize)];
-        //add to linkedlist
-        l.addLast(he);
+        this.hArray[getIndexOfKeyByTableSize(key,tableSize)].addLast(new HashElement<K,V>(key,value));
         numOfElements++;
-        return true;
     }
 
     public boolean remove(K key){
