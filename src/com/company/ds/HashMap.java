@@ -121,46 +121,83 @@ public class HashMap <K extends Comparable<K>,V>{
         return numOfElements;
     }
 
-    public KeySet<K> keySet(){
-        return new KeySet<K>();
+    public KeySet keySet(){
+       return new KeySet();
     }
 
-    class KeySet<K> implements Iterable<K>{
-        public boolean contains(K key){
-            return contains(key);
-        }
+    public ValueSet valueSet(){
+        return new ValueSet();
+    }
+
+    public EntrySet entrySet(){
+        return new EntrySet();
+    }
+
+    public class KeySet implements Iterable<K>{
         @Override
         public Iterator<K> iterator() {
             return new KeyIterator<K>();
         }
     }
 
-    private final class KeyIterator<T> implements Iterator<T>{
-        private K[] keys;
+    public class ValueSet implements Iterable<V>{
+        @Override
+        public Iterator<V> iterator() {
+            return new ValuesIterator<V>();
+        }
+    }
+
+    public class EntrySet implements Iterable<HashElement<K,V>>{
+        @Override
+        public Iterator<HashElement<K,V>> iterator() {
+            return new EntryIterator<HashElement<K,V>>();
+        }
+    }
+
+    abstract class HashTableIterator{
+        private HashElement<K,V>[] hashElements;
         private int position;
-        public KeyIterator(){
-            keys = (K[]) new Object[numOfElements];
+
+        public HashTableIterator(){
+            hashElements = (HashElement<K,V>[]) new HashElement[numOfElements];
 
             int j=0;
-            for(int i=0;i<tableSize;i++){
-                for(HashElement<K,V> hashElement:hArray[i]){
-                  keys[j++] = hashElement.key;
+            for(int i=0;i<hArray.length;i++){
+                for(HashElement hashElement : hArray[i]){
+                    hashElements[j++] = hashElement;
                 }
             }
 
-            position=0;
-        }
-        @Override
-        public boolean hasNext() {
-            return position< keys.length;
+            position = 0;
         }
 
+        public boolean hasNext() {
+            return position< hashElements.length;
+        }
+
+        protected HashElement<K,V> nextNode(){
+           return hashElements[position++];
+        }
+    }
+
+    final class KeyIterator<T> extends HashTableIterator implements Iterator<T>{
         @Override
         public T next() {
-            if(!hasNext()){
-                return null;
-            }
-            return (T) keys[position++];
+            return (T) nextNode().key;
+        }
+    }
+
+    final class ValuesIterator<T> extends HashTableIterator implements Iterator<T>{
+        @Override
+        public T next() {
+            return (T) nextNode().value;
+        }
+    }
+
+    final class EntryIterator<T> extends HashTableIterator implements Iterator<T>{
+        @Override
+        public T next() {
+            return (T) nextNode();
         }
     }
 }
