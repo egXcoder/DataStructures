@@ -50,11 +50,16 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
         numOfElements++;
     }
 
-    public void remove(K key){
+    public boolean remove(K key){
+        if(!contains(key)){
+            return false;
+        }
+
         this.hArray[getIndexOfKeyByTableSize(key,tableSize)]
                 .remove(new HashElement<K,V>(key,null));
 
         numOfElements--;
+        return true;
     }
 
     public boolean contains(K key){
