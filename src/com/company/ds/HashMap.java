@@ -58,12 +58,13 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
     }
 
     public V getValue(K key){
-        HashElement<K,V> he = new HashElement<K,V>(key,null);
-        LinkedList<HashElement<K,V>> l = this.hArray[getIndexOfKeyByTableSize(key,tableSize)];
-        HashElement<K,V> found = l.find(he);
+        HashElement<K,V> found = this.hArray[getIndexOfKeyByTableSize(key,tableSize)]
+                .find(new HashElement<K,V>(key,null));
+
         if(found !=null){
             return found.value;
         }
+
         return null;
     }
 
@@ -84,19 +85,18 @@ public class HashMap <K extends Comparable<K>,V> implements Iterable<K>{
         hArray = newHArray;
     }
 
-
-
     private double loadFactor(){
-        return numOfElements/tableSize;
+        return (double) numOfElements/tableSize;
     }
 
     private int getIndexOfKeyByTableSize(K key,int tableSize){
-        //get hashcode of key
         int hashCode = key.hashCode();
-        //make sure hashcode is positive integer
-        hashCode = hashCode & 0x7FFFFFFF;
-        //index=modules hashcode with table size
+        hashCode = getAbsoluteValueOfHashCode(hashCode);
         return (hashCode%tableSize);
+    }
+
+    private int getAbsoluteValueOfHashCode(int hashCode){
+        return hashCode & 0x7FFFFFFF;
     }
 
     @Override
