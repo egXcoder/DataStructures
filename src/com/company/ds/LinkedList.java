@@ -32,18 +32,30 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
         Node<E> node = new Node<E>(obj);
 
         if(isEmpty()){
-            head=tail=node;
-            currentSize++;
+            addNodeToEmptyLinkedList(node);
             return;
         }
 
-        node.next = head;
-        head=node;
-        currentSize++;
+        addNodeToFirstPosition(node);
     }
 
     public boolean isEmpty(){
         return getCurrentSize() == 0;
+    }
+
+    private void addNodeToEmptyLinkedList(Node<E> node){
+        if(!isEmpty()){
+            throw new RuntimeException("LinkedList is not empty");
+        }
+
+        head=tail=node;
+        currentSize++;
+    }
+
+    private void addNodeToFirstPosition(Node<E> node){
+        node.next = head;
+        head=node;
+        currentSize++;
     }
 
     /**
@@ -53,13 +65,15 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
     public void addLast(E obj){
         Node<E> node = new Node<E>(obj);
 
-        //if empty linkedlist
-        if(head==null){
-            head=tail=node;
-            currentSize++;
+        if(isEmpty()){
+            addNodeToEmptyLinkedList(node);
             return;
         }
 
+        addNodeToLastPosition(node);
+    }
+
+    private void addNodeToLastPosition(Node<E> node){
         tail.next=node;
         tail=node;
         currentSize++;
