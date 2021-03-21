@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
-    private class Node<E>{
+    private static class Node<E>{
         E data;
         Node<E> next;
 
