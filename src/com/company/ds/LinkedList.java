@@ -145,28 +145,24 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
             return null;
         }
 
-        Node<E> tmp1 = null;
-        Node<E> tmp2 = head;
-        while (tmp1!=tail){
-            //we are still looping through the linkedlist
-            if(((Comparable<E>) obj).compareTo(tmp2.data) == 0){
+        if(isOnlySingleElementExist() && (obj).compareTo(head.data) == 0){
+            return removeFirst();
+        }
+
+        Node<E> tmp1 = head;
+        Node<E> tmp2 = head.next;
+        while(tmp2!=tail){
+            if((obj).compareTo(tmp2.data) == 0){
                 //we found a match
-                if(tmp2==head){
-                    return removeFirst();
-                }
-                if(tmp2==tail){
-                    return removeLast();
-                }
                 E foundMatch = tmp2.data;
                 tmp1.next = tmp2.next;
                 currentSize--;
                 return foundMatch;
             }
-            tmp1=tmp2;
+            tmp1=tmp1.next;
             tmp2=tmp2.next;
         }
 
-        //if we reached here, this will mean we couldn't find a match
         return null;
     }
 
