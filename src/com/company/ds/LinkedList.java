@@ -31,8 +31,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
     public void addFirst(E obj){
         Node<E> node = new Node<E>(obj);
 
-        //if empty linkedlist
-        if(head==null){
+        if(isEmpty()){
             head=tail=node;
             currentSize++;
             return;
@@ -41,6 +40,10 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
         node.next = head;
         head=node;
         currentSize++;
+    }
+
+    public boolean isEmpty(){
+        return getCurrentSize() == 0;
     }
 
     /**
