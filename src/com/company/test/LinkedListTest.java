@@ -187,6 +187,6 @@ class LinkedListTest {
         for(Object E:l){
             counter++;
         }
-        assertEquals(counter,3);
+        assertEquals(4,counter);
     }
 }
