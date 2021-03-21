@@ -84,8 +84,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
      * @return
      */
     public E removeFirst(){
-        //empty linkedlist
-        if(head==null){
+        if(isEmpty()){
             return null;
         }
 
@@ -109,8 +108,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
      * @return
      */
     public E removeLast(){
-        //empty linkedlist
-        if(head==null){
+        if(isEmpty()){
             return null;
         }
 
@@ -143,7 +141,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
      * @return E
      */
     public E remove(E obj){
-        if(head==null){
+        if(isEmpty()){
             return null;
         }
 
@@ -177,7 +175,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
      * @return
      */
     public E peekFirst(){
-        if(head==null){
+        if(isEmpty()){
             return null;
         }
         return head.data;
