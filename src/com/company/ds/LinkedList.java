@@ -182,7 +182,7 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
      * @return
      */
     public E peekLast(){
-        if(tail==null){
+        if(isEmpty()){
             return null;
         }
         return tail.data;
@@ -190,30 +190,26 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
 
     public E find(E data){
         for(E el:this){
-            if(((Comparable<E>) el).compareTo(data) == 0){
+            if(el.compareTo(data) == 0){
                 return el;
             }
         }
         return null;
     }
 
-    /**
-     * get current size of linkedlist
-     * @return
-     */
     public int getCurrentSize(){
         return currentSize;
     }
 
     @Override
     public Iterator<E> iterator() {
-        return new IteratorHelper<E>();
+        return new DataIterator<E>();
     }
 
-    private class IteratorHelper<T> implements Iterator<T>{
+    private class DataIterator<T> implements Iterator<T>{
         private Node<E> node;
 
-        public IteratorHelper(){
+        public DataIterator(){
             node = head;
         }
 
@@ -232,5 +228,4 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
             return (T) data;
         }
     }
-
 }
