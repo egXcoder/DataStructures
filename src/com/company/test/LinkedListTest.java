@@ -109,7 +109,7 @@ class LinkedListTest {
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
-        assertEquals(l.remove("test"),"test");
+        assertEquals("test",l.remove("test"));
     }
 
     @Test

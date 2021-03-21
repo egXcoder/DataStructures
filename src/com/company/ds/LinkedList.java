@@ -145,13 +145,13 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
             return null;
         }
 
-        if(isOnlySingleElementExist() && (obj).compareTo(head.data) == 0){
+        if(obj.compareTo(head.data) == 0){
             return removeFirst();
         }
 
         Node<E> tmp1 = head;
         Node<E> tmp2 = head.next;
-        while(tmp2!=tail){
+        while(tmp2!=null){
             if((obj).compareTo(tmp2.data) == 0){
                 //we found a match
                 E foundMatch = tmp2.data;
