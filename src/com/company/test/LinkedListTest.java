@@ -189,4 +189,10 @@ class LinkedListTest {
         }
         assertEquals(4,counter);
     }
+
+    @Test
+    void isEmpty(){
+        LinkedList l = new LinkedList();
+        assertTrue(l.isEmpty());
+    }
 }
