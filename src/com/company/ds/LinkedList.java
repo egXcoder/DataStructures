@@ -90,16 +90,18 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
 
         E tmp = head.data;
 
-        if(head==tail){
-            //only single Element exist
+        if(isOnlySingleElementExist()){
             head = tail = null;
         }else {
-            //multiple elements exist
             head = head.next;
         }
 
         currentSize--;
         return tmp;
+    }
+
+    private boolean isOnlySingleElementExist(){
+        return getCurrentSize() == 1;
     }
 
     /**
@@ -112,12 +114,8 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
             return null;
         }
 
-        //single linkedlist
-        if(head == tail){
-            E lastData = head.data;
-            head=tail=null;
-            currentSize--;
-            return lastData;
+        if(isOnlySingleElementExist()){
+            return removeFirst();
         }
 
         Node<E> tmp1 = head;
