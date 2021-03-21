@@ -125,7 +125,9 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
             tmp2 = tmp2.next;
         }
 
-        //reaching here means tmp1==index of(tail-1) , tmp2 = tail
+        //reaching here means
+        //tmp1==index of(tail-1)
+        //tmp2 = tail
         E lastData = tmp2.data;
         tmp1.next=null;
         tail=tmp1;
