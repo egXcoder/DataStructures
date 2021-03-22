@@ -3,6 +3,7 @@ package com.company.ds;
 import com.company.ds.Contracts.List;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class ArrayList<E extends Comparable<E>> implements List<E> {
@@ -10,7 +11,7 @@ public class ArrayList<E extends Comparable<E>> implements List<E> {
     private int currentSize;
 
     public ArrayList(int size){
-        this.array = (E[]) new Object[size];
+        this.array = (E[]) new Comparable[size];
         this.currentSize=0;
     }
 
@@ -28,9 +29,13 @@ public class ArrayList<E extends Comparable<E>> implements List<E> {
 
     @Override
     public boolean remove(E element) {
+        if(isEmpty()){
+            return false;
+        }
+
         for(int i=0;i<array.length;i++){
             if(element.compareTo(array[i])==0){
-                E[] newArray = (E[]) new Object[array.length];
+                E[] newArray = (E[]) new Comparable[array.length];
                 for(int j=0;j<array.length;j++){
                     if(i==array.length-1 && i==j){
                         continue;
