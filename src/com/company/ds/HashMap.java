@@ -1,5 +1,7 @@
 package com.company.ds;
 
+import com.company.ds.Contracts.List;
+
 import java.util.Iterator;
 
 public class HashMap <K extends Comparable<K>,V>{
@@ -71,15 +73,15 @@ public class HashMap <K extends Comparable<K>,V>{
 
     public boolean contains(K key){
         return this.hArray[getIndexOfKeyByTableSize(key,tableSize)]
-                .find(new HashElement<K,V>(key,null)) != null;
+                .contains(new HashElement<K,V>(key,null));
     }
 
     public V getValue(K key){
-        HashElement<K,V> found = this.hArray[getIndexOfKeyByTableSize(key,tableSize)]
-                .find(new HashElement<K,V>(key,null));
-
-        if(found !=null){
-            return found.value;
+        List<HashElement<K,V>> list = this.hArray[getIndexOfKeyByTableSize(key,tableSize)];
+        for(HashElement<K,V> he:list){
+            if(he.compareTo(new HashElement<K,V>(key,null)) == 0){
+                return he.value;
+            }
         }
 
         return null;

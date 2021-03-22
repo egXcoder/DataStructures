@@ -5,7 +5,7 @@ import com.company.ds.Contracts.List;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedList<E extends Comparable<E>> implements Iterable<E> , List<E> {
+public class LinkedList<E extends Comparable<E>> implements List<E> {
     private static class Node<E>{
         E data;
         Node<E> next;

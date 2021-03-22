@@ -21,7 +21,6 @@ class LinkedListTest {
         LinkedList<String> l = new LinkedList<String>();
         l.addFirst("test");
         assertEquals(l.getCurrentSize(),1);
-        assertEquals(l.peekFirst(),"test");
     }
 
     @Test
@@ -30,7 +29,6 @@ class LinkedListTest {
         l.addFirst("test");
         l.addFirst("test2");
         assertEquals(l.getCurrentSize(),2);
-        assertEquals(l.peekFirst(),"test2");
     }
 
     @Test
@@ -40,7 +38,6 @@ class LinkedListTest {
         l.addFirst("test2");
         l.addFirst("test3");
         assertEquals(l.getCurrentSize(),3);
-        assertEquals(l.peekFirst(),"test3");
     }
 
     @Test
@@ -48,7 +45,6 @@ class LinkedListTest {
         LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         assertEquals(l.getCurrentSize(),1);
-        assertEquals(l.peekLast(),"test");
     }
 
     @Test
@@ -57,7 +53,6 @@ class LinkedListTest {
         l.addLast("test");
         l.addLast("test2");
         assertEquals(l.getCurrentSize(),2);
-        assertEquals(l.peekLast(),"test2");
     }
 
     @Test
@@ -67,7 +62,6 @@ class LinkedListTest {
         l.addLast("test2");
         l.addLast("test3");
         assertEquals(l.getCurrentSize(),3);
-        assertEquals(l.peekLast(),"test3");
     }
 
     @Test
@@ -81,7 +75,6 @@ class LinkedListTest {
         LinkedList<String> l = new LinkedList<String>();
         l.addFirst("test");
         assertEquals(l.removeFirst(),"test");
-        assertEquals(l.getCurrentSize(),0);
     }
 
     @Test
@@ -90,12 +83,11 @@ class LinkedListTest {
         l.addFirst("test");
         l.addFirst("test2");
         assertEquals(l.removeFirst(),"test2");
-        assertEquals(l.getCurrentSize(),1);
     }
 
     @org.junit.jupiter.api.Test
     void removeLast() {
-        LinkedList<String> l = new LinkedList<String>();
+        LinkedList<Double> l = new LinkedList<Double>();
         for (int i=0;i<100;i++){
             l.addFirst(Math.random());
         }
@@ -109,7 +101,7 @@ class LinkedListTest {
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
-        assertEquals("test",l.remove("test"));
+        assertTrue(l.remove("test"));
     }
 
     @Test
@@ -118,7 +110,7 @@ class LinkedListTest {
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
-        assertEquals(l.remove("test3"),"test3");
+        assertTrue(l.remove("test3"));
     }
 
     @Test
@@ -127,7 +119,7 @@ class LinkedListTest {
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
-        assertEquals(l.remove("test2"),"test2");
+        assertTrue(l.remove("test2"));
     }
 
     @Test
@@ -136,13 +128,13 @@ class LinkedListTest {
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
-        assertNull(l.remove("test4"));
+        assertFalse(l.remove("test4"));
     }
 
     @Test
     void removeObjectFromEmptyLinkedlist() {
         LinkedList<String> l = new LinkedList<String>();
-        assertNull(l.remove("test4"));
+        assertFalse(l.remove("test4"));
     }
 
     @Test
