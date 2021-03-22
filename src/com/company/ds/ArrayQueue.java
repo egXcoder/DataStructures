@@ -19,6 +19,10 @@ public class ArrayQueue<E> {
             this.array = scaledArray;
         }
 
+        if(read==-1){
+            read = 0;
+        }
+
         write = (write+1) % array.length;
         array[write] = elem;
         count++;
