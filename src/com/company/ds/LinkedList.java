@@ -1,9 +1,11 @@
 package com.company.ds;
 
+import com.company.ds.Contracts.List;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
+public class LinkedList<E extends Comparable<E>> implements Iterable<E> , List<E> {
     private static class Node<E>{
         E data;
         Node<E> next;
@@ -140,13 +142,14 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
      * @param obj
      * @return E
      */
-    public E remove(E obj){
+    public boolean remove(E obj){
         if(isEmpty()){
-            return null;
+            return false;
         }
 
         if(obj.compareTo(head.data) == 0){
-            return removeFirst();
+            removeFirst();
+            return true;
         }
 
         Node<E> tmp1 = head;
@@ -157,13 +160,13 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> {
                 E foundMatch = tmp2.data;
                 tmp1.next = tmp2.next;
                 currentSize--;
-                return foundMatch;
+                return true;
             }
             tmp1=tmp1.next;
             tmp2=tmp2.next;
         }
 
-        return null;
+        return false;
     }
 
     /**
