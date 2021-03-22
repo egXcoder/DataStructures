@@ -1,6 +1,7 @@
 ## This is a practice on implementing DataStructures Using Java
 
 ##     Data Structures
+- ArrayList
 - LinkedList
 - HashMap
 - HashSet
