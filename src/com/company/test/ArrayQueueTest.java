@@ -35,6 +35,6 @@ public class ArrayQueueTest {
 
         }
 
-        assertEquals(data,11);
+        assertEquals(11,data);
     }
 }
