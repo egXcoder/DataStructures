@@ -9,14 +9,15 @@ public class ArrayList<E extends Comparable<E>> implements List<E> {
     private E[] array;
     private int currentSize;
 
-    public ArrayList(){
+    public ArrayList(int size){
+        this.array = (E[]) new Object[size];
         this.currentSize=0;
     }
 
     @Override
     public void add(E element) {
         if(isFull()){
-            array = Arrays.copyOf(array,currentSize*2);
+            array = Arrays.copyOf(array,array.length*2);
         }
         array[currentSize++] = element;
     }
@@ -29,7 +30,19 @@ public class ArrayList<E extends Comparable<E>> implements List<E> {
     public boolean remove(E element) {
         for(int i=0;i<array.length;i++){
             if(element.compareTo(array[i])==0){
-                array[i] = null;
+                E[] newArray = (E[]) new Object[array.length];
+                for(int j=0;j<array.length;j++){
+                    if(i==array.length-1 && i==j){
+                        continue;
+                    }
+                    if(j<i){
+                        newArray[j] = array[j];
+                    }
+                    if(j>=i){
+                        newArray[j] = array[j+1];
+                    }
+                }
+                array = newArray;
             }
         }
         return false;
