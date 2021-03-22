@@ -39,7 +39,6 @@ class ArrayListTest {
     void removeFromArrayList(){
         ArrayList<String> al = new ArrayList<String>(3);
         al.add("hello");
-        al.remove("hello");
-        assertTrue(al.isEmpty());
+        assertTrue(al.remove("hello"));
     }
 }

@@ -33,13 +33,20 @@ public class ArrayList<E extends Comparable<E>> implements List<E> {
             return false;
         }
 
-        for(int i=0;i<array.length;i++){
+        if(getCurrentSize()==1){
+            if(array[0].compareTo(element)==0){
+                array = (E[]) new Comparable[array.length];
+                currentSize=0;
+                return true;
+            }
+
+            return false;
+        }
+
+        for(int i=0;i<currentSize;i++){
             if(element.compareTo(array[i])==0){
                 E[] newArray = (E[]) new Comparable[array.length];
-                for(int j=0;j<array.length;j++){
-                    if(i==array.length-1 && i==j){
-                        continue;
-                    }
+                for(int j=0;j<currentSize-1;j++){
                     if(j<i){
                         newArray[j] = array[j];
                     }
@@ -48,6 +55,8 @@ public class ArrayList<E extends Comparable<E>> implements List<E> {
                     }
                 }
                 array = newArray;
+                currentSize--;
+                return true;
             }
         }
         return false;
