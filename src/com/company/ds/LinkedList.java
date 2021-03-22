@@ -26,6 +26,10 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> , List<E
         currentSize=0;
     }
 
+    public void add(E obj){
+        addLast(obj);
+    }
+
     /**
      * Adding to the beginning of linkedlist , O(1) Operation
      * @param obj
@@ -191,13 +195,13 @@ public class LinkedList<E extends Comparable<E>> implements Iterable<E> , List<E
         return tail.data;
     }
 
-    public E find(E data){
+    public boolean contains(E data){
         for(E el:this){
             if(el.compareTo(data) == 0){
-                return el;
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     public int getCurrentSize(){
