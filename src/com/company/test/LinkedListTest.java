@@ -18,7 +18,7 @@ class LinkedListTest {
 
     @Test
     void addFirstOnEmptyLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addFirst("test");
         assertEquals(l.getCurrentSize(),1);
         assertEquals(l.peekFirst(),"test");
@@ -26,7 +26,7 @@ class LinkedListTest {
 
     @Test
     void addFirstOnSingleElementLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addFirst("test");
         l.addFirst("test2");
         assertEquals(l.getCurrentSize(),2);
@@ -35,7 +35,7 @@ class LinkedListTest {
 
     @Test
     void addFirstOnManyElementsLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addFirst("test");
         l.addFirst("test2");
         l.addFirst("test3");
@@ -45,7 +45,7 @@ class LinkedListTest {
 
     @Test
     void addLastOnEmptyLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         assertEquals(l.getCurrentSize(),1);
         assertEquals(l.peekLast(),"test");
@@ -53,7 +53,7 @@ class LinkedListTest {
 
     @Test
     void addLastOnSingleLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         l.addLast("test2");
         assertEquals(l.getCurrentSize(),2);
@@ -62,7 +62,7 @@ class LinkedListTest {
 
     @Test
     void addLastOnManyLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
@@ -72,13 +72,13 @@ class LinkedListTest {
 
     @Test
     void removeFirstOnEmptyLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         assertNull(l.removeFirst());
     }
 
     @Test
     void removeFirstOnSingleLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addFirst("test");
         assertEquals(l.removeFirst(),"test");
         assertEquals(l.getCurrentSize(),0);
@@ -86,7 +86,7 @@ class LinkedListTest {
 
     @Test
     void removeFirstOnManyLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addFirst("test");
         l.addFirst("test2");
         assertEquals(l.removeFirst(),"test2");
@@ -95,7 +95,7 @@ class LinkedListTest {
 
     @org.junit.jupiter.api.Test
     void removeLast() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         for (int i=0;i<100;i++){
             l.addFirst(Math.random());
         }
@@ -105,7 +105,7 @@ class LinkedListTest {
 
     @Test
     void removeObjectWhichExistOnFirst() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
@@ -114,7 +114,7 @@ class LinkedListTest {
 
     @Test
     void removeObjectWhichExistOnLast() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
@@ -123,7 +123,7 @@ class LinkedListTest {
 
     @Test
     void removeObjectWhichExistOnMiddle() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
@@ -132,7 +132,7 @@ class LinkedListTest {
 
     @Test
     void removeObjectWithNoMatchesInLinkedlist() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
@@ -141,13 +141,13 @@ class LinkedListTest {
 
     @Test
     void removeObjectFromEmptyLinkedlist() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         assertNull(l.remove("test4"));
     }
 
     @Test
     void peekFirst() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
@@ -156,14 +156,14 @@ class LinkedListTest {
 
     @Test
     void peekFirstOnEmptyLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         assertNull(l.peekFirst());
     }
 
 
     @Test
     void peekLast() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
@@ -172,13 +172,13 @@ class LinkedListTest {
 
     @Test
     void peekLastOnEmptyLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         assertNull(l.peekLast());
     }
 
     @Test
     void iterateOverLinkedList() {
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         l.addLast("test1");
         l.addLast("test2");
         l.addLast("test3");
@@ -192,7 +192,14 @@ class LinkedListTest {
 
     @Test
     void isEmpty(){
-        LinkedList l = new LinkedList();
+        LinkedList<String> l = new LinkedList<String>();
         assertTrue(l.isEmpty());
+    }
+
+    @Test
+    void isNotEmpty(){
+        LinkedList<String> l = new LinkedList<String>();
+        l.addFirst("hello");
+        assertFalse(l.isEmpty());
     }
 }
