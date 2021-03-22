@@ -12,7 +12,7 @@ public class ArrayQueue<E> {
         array = new Object[size];
     }
 
-    public void enqueue(E elem) throws Exception{
+    public void enqueue(E elem){
         if(isFull()){
             Object[] scaledArray = new Object[count*2];
             System.arraycopy(array,0,scaledArray,0,count);

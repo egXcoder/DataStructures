@@ -25,11 +25,12 @@ public class ArrayQueueTest {
     @Test
     public void checkDequeue(){
         ArrayQueue<Integer> q = new ArrayQueue(10);
+        q.enqueue(11);
+        q.enqueue(22);
+        q.enqueue(33);
         int data =0;
         try {
-            q.enqueue(11);
-            q.enqueue(22);
-            q.enqueue(33);
+
             data = q.dequeue();
         }catch (Exception ex){
 
