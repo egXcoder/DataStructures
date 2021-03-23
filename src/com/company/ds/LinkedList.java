@@ -46,7 +46,7 @@ public class LinkedList<E extends Comparable<E>> implements List<E> {
     }
 
     public boolean isEmpty(){
-        return getCurrentSize() == 0;
+        return getSize() == 0;
     }
 
     private void addNodeToEmptyLinkedList(Node<E> node){
@@ -107,7 +107,7 @@ public class LinkedList<E extends Comparable<E>> implements List<E> {
     }
 
     private boolean isOnlySingleElementExist(){
-        return getCurrentSize() == 1;
+        return getSize() == 1;
     }
 
     /**
@@ -204,7 +204,7 @@ public class LinkedList<E extends Comparable<E>> implements List<E> {
         return false;
     }
 
-    public int getCurrentSize(){
+    public int getSize(){
         return currentSize;
     }
 

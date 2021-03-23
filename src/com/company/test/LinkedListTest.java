@@ -20,7 +20,7 @@ class LinkedListTest {
     void addFirstOnEmptyLinkedList() {
         LinkedList<String> l = new LinkedList<String>();
         l.addFirst("test");
-        assertEquals(l.getCurrentSize(),1);
+        assertEquals(l.getSize(),1);
     }
 
     @Test
@@ -28,7 +28,7 @@ class LinkedListTest {
         LinkedList<String> l = new LinkedList<String>();
         l.addFirst("test");
         l.addFirst("test2");
-        assertEquals(l.getCurrentSize(),2);
+        assertEquals(l.getSize(),2);
     }
 
     @Test
@@ -37,14 +37,14 @@ class LinkedListTest {
         l.addFirst("test");
         l.addFirst("test2");
         l.addFirst("test3");
-        assertEquals(l.getCurrentSize(),3);
+        assertEquals(l.getSize(),3);
     }
 
     @Test
     void addLastOnEmptyLinkedList() {
         LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
-        assertEquals(l.getCurrentSize(),1);
+        assertEquals(l.getSize(),1);
     }
 
     @Test
@@ -52,7 +52,7 @@ class LinkedListTest {
         LinkedList<String> l = new LinkedList<String>();
         l.addLast("test");
         l.addLast("test2");
-        assertEquals(l.getCurrentSize(),2);
+        assertEquals(l.getSize(),2);
     }
 
     @Test
@@ -61,7 +61,7 @@ class LinkedListTest {
         l.addLast("test");
         l.addLast("test2");
         l.addLast("test3");
-        assertEquals(l.getCurrentSize(),3);
+        assertEquals(l.getSize(),3);
     }
 
     @Test
@@ -92,7 +92,7 @@ class LinkedListTest {
             l.addFirst(Math.random());
         }
         l.removeLast();
-        assertEquals(l.getCurrentSize(),99);
+        assertEquals(l.getSize(),99);
     }
 
     @Test

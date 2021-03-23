@@ -32,7 +32,7 @@ class ArrayListTest {
     void addToArrayList(){
         ArrayList<String> al = new ArrayList<String>(3);
         al.add("hello");
-        assertEquals(1,al.getCurrentSize());
+        assertEquals(1,al.getSize());
     }
 
     @Test
