@@ -5,26 +5,65 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList l = new ArrayList(2);
-        l.add("asd");
-        l.add("qwe");
-        l.add("ewq");
-        l.remove("qwe");
-        System.out.println(l.get(0));
-        System.out.println(l.get(1));
-      PriorityQueue queue = new PriorityQueue();
-      queue.add(12);
-      queue.add(3);
-      queue.add(23);
-      queue.add(5);
-
-      System.out.println(queue.poll());
-      System.out.println(queue.poll());
-      System.out.println(queue.poll());
-      System.out.println(queue.poll());
+        System.out.println(openLock(new String[]{"0201","0101","0102","1212","2002"},"0202"));
     }
 
     private static void test(int[] x){
         x[0] = 123;
+    }
+
+    public static int openLock(String[] deadends, String target) {
+        Queue<String> q = new LinkedList<String>();
+        HashSet<String> set = new HashSet<String>();
+
+        int step = 0;
+        q.add("0000");
+
+        while(!q.isEmpty()){
+            step++;
+
+            int size = q.size();
+            for(int i=0;i<size;i++){
+                String x = q.peek();
+                set.add(x);
+
+                if(x.equals(target)){
+                    return step-1;
+                }
+
+                System.out.println(x);
+                for(int j=0;j<x.length();j++){
+                    char[] charArray = x.toCharArray();
+                    if(charArray[j]+1 > 57){
+                        charArray[j] = (char) ((int) x.charAt(j)+1-10);
+                    }else{
+                        charArray[j] = (char) ((int) x.charAt(j)+1);
+                    }
+                    String xx = String.valueOf(charArray);
+                    if(!Arrays.stream(deadends).anyMatch(xx::equals) && !set.contains(xx)){
+                        q.add(xx);
+                    }
+
+
+                    charArray = x.toCharArray();
+                    if(charArray[j]-1 < 48){
+                        charArray[j] = (char) ((int) x.charAt(j)-1+10);
+                    }else{
+                        charArray[j] = (char) ((int) x.charAt(j)-1);
+                    }
+
+                    xx = String.valueOf(charArray);
+                    if(!Arrays.stream(deadends).anyMatch(xx::equals)  && !set.contains(xx)){
+                        q.add(xx);
+                    }
+                }
+
+
+                q.poll();
+            }
+
+        }
+
+        return -1;
     }
 }
