@@ -204,6 +204,26 @@ public class LinkedList<E extends Comparable<E>> implements List<E> {
         return false;
     }
 
+    @Override
+    public E get(int index){
+        if(index<0){
+            throw new RuntimeException("Index is not valid");
+        }
+        if(index>=getSize()){
+            throw new RuntimeException("Index is out of bound exception");
+        }
+
+        Node<E> node = head;
+        for(int i=0;i<getSize();i++){
+            if(i==index){
+                return node.data;
+            }
+            node = node.next;
+        }
+
+        return null;
+    }
+
     public int getSize(){
         return currentSize;
     }

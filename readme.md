@@ -10,10 +10,10 @@
     - isEmpty() : boolean
         - ArrayList 
           
-                -- uses Array as Internal Structure and it double in size when array is full
+                 uses Array as Internal Structure and it double in size when array is full
         - LinkedList
           
-                -- uses Nodes that is pointing to each other
+                uses Nodes that is pointing to each other
 
 Other Data Structures  
 - HashMap
