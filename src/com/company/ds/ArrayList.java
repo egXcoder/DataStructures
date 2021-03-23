@@ -76,7 +76,7 @@ public class ArrayList<E extends Comparable<E>> implements List<E> {
         if(index<0){
             throw new RuntimeException("Index is not valid");
         }
-        if(index>=array.length){
+        if(index>=getSize()){
             throw new RuntimeException("Index is out of bound exception");
         }
         return array[index];

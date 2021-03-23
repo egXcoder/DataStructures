@@ -41,4 +41,25 @@ class ArrayListTest {
         al.add("hello");
         assertTrue(al.remove("hello"));
     }
+
+    @Test
+    void getAtIndexOfEmptyAl(){
+        ArrayList<String> al = new ArrayList<String>(3);
+        assertThrows(RuntimeException.class,()->al.get(0));
+    }
+
+    @Test
+    void getAtIndexWhenItsOutOfBound(){
+        ArrayList<String> al = new ArrayList<String>(3);
+        assertThrows(RuntimeException.class,()->al.get(-1));
+    }
+
+    @Test
+    void getAtIndex(){
+        ArrayList<String> al = new ArrayList<String>(3);
+        al.add("hello");
+        al.add("world");
+        assertEquals("hello",al.get(0));
+        assertEquals("world",al.get(1));
+    }
 }
