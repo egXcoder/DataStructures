@@ -1,5 +1,6 @@
 package com.company.test;
 
+import com.company.ds.ArrayList;
 import com.company.ds.LinkedList;
 import org.junit.jupiter.api.Test;
 
@@ -193,5 +194,26 @@ class LinkedListTest {
         LinkedList<String> l = new LinkedList<String>();
         l.addFirst("hello");
         assertFalse(l.isEmpty());
+    }
+
+    @Test
+    void getAtIndexOfEmptyAl(){
+        LinkedList<String> ll = new LinkedList<String>();
+        assertThrows(RuntimeException.class,()->ll.get(0));
+    }
+
+    @Test
+    void getAtIndexWhenItsOutOfBound(){
+        LinkedList<String> ll = new LinkedList<String>();
+        assertThrows(RuntimeException.class,()->ll.get(-1));
+    }
+
+    @Test
+    void getAtIndex(){
+        LinkedList<String> ll = new LinkedList<String>();
+        ll.add("hello");
+        ll.add("world");
+        assertEquals("hello",ll.get(0));
+        assertEquals("world",ll.get(1));
     }
 }
