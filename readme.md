@@ -4,11 +4,12 @@
 List Interface
 - ArrayList
   - uses Array as Internal Structure and it double in size when array is full
-  - add(object) ... O(1) Time Complexity 
-  - remove(object) ... O(n) Time Complexity  
-  - contains(object) .. O(n) Time Complexity
-  - get(int index) .. O(1) Time Complexity
-  - getSize() .. O(1) Time Complexity  
+  - add(object) : void // O(1) Time Complexity 
+  - remove(object) : boolean // O(n) Time Complexity  
+  - contains(object) : boolean // O(n) Time Complexity
+  - get(int index) : Object // O(1) Time Complexity
+  - getSize() : int    // O(1) Time Complexity
+  - isEmpty() : boolean //O(1) Time Complexity  
 - LinkedList
 
 Other Data Structures  
