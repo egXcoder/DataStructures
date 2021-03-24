@@ -2,12 +2,12 @@ package com.company.ds;
 
 import java.util.ArrayDeque;
 
-public class ArrayBlockingDequeue<E> {
+public class ArrayDequeue<E> {
     private Object[] array;
     private int front=0,rear=0;
     private int count = 0;
 
-    public ArrayBlockingDequeue(int size){
+    public ArrayDequeue(int size){
         if(size<1){
             throw new IllegalArgumentException();
         }

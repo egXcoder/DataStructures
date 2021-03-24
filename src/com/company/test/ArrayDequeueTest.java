@@ -1,15 +1,15 @@
 package com.company.test;
 
-import com.company.ds.ArrayBlockingDequeue;
+import com.company.ds.ArrayDequeue;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ArrayBlockingDequeueTest {
+public class ArrayDequeueTest {
     @Test
     public void checkAddFirstRemoveFirst(){
-        ArrayBlockingDequeue<Integer> d = new ArrayBlockingDequeue<Integer>(10);
+        ArrayDequeue<Integer> d = new ArrayDequeue<Integer>(10);
         try {
             d.addFirst(11);
             d.addFirst(22);
@@ -35,7 +35,7 @@ public class ArrayBlockingDequeueTest {
 
     @Test
     public void checkAddLastRemoveLast(){
-        ArrayBlockingDequeue<Integer> d = new ArrayBlockingDequeue<Integer>(10);
+        ArrayDequeue<Integer> d = new ArrayDequeue<Integer>(10);
         try {
             d.addLast(11);
             d.addLast(22);
