@@ -39,6 +39,9 @@ public class ArrayDequeue<E> {
         if(read==write){
             read = write = -1;
         }else{
+            if(write<=0){
+                write = write + array.length;
+            }
             write = (write-1) % array.length;
         }
 
@@ -50,13 +53,12 @@ public class ArrayDequeue<E> {
             throw new RuntimeException("Full Dequeue");
         }
 
-        if(isEmpty()){
-            addLast(elem);
-            return;
+        if(read<=0){
+            read= read + array.length;
         }
 
+        read = read-1;
         array[read] = elem;
-        read = read-1 % array.length;
         count++;
     }
 
