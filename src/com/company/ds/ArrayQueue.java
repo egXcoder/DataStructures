@@ -1,6 +1,8 @@
 package com.company.ds;
 
-public class ArrayQueue<E> {
+import com.company.ds.Contracts.Queue;
+
+public class ArrayQueue<E> implements Queue<E> {
     private Object[] array;
     private int read=-1,write=-1;
     private int count = 0;
@@ -61,5 +63,23 @@ public class ArrayQueue<E> {
 
     public int getSize(){
         return count;
+    }
+
+    @Override
+    public void add(E element) {
+        enqueue(element);
+    }
+
+    @Override
+    public E poll() {
+        return dequeue();
+    }
+
+    @Override
+    public E peek() {
+        if(isEmpty()){
+            throw new RuntimeException("can't peek from empty queue");
+        }
+        return (E) array[read];
     }
 }
