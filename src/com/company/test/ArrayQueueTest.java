@@ -13,7 +13,7 @@ public class ArrayQueueTest {
             q.enqueue(i);
         }
 
-        assertEquals(q.getCount(),100);
+        assertEquals(q.getSize(),100);
     }
 
     @Test

@@ -59,7 +59,7 @@ public class ArrayQueue<E> {
         return read == (write+1) % array.length;
     }
 
-    public int getCount(){
+    public int getSize(){
         return count;
     }
 }
