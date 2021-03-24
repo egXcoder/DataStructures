@@ -5,25 +5,8 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(numSquares(88));
     }
 
-    public static int numSquares(int n) {
-        int [] mem = new int[n+1];
-        for(int i=0;i<=n;i++)
-            mem[i] = i;
-
-        for(int i=1;i<=n;i++)
-        {
-            int biggestSquareRoot = (int) Math.sqrt(i);
-            for(int j=1;j<=biggestSquareRoot;j++)
-            {
-                if(j*j<=i)
-                    dp[i] = Math.min(dp[i],dp[i-j*j]+1);
-            }
-        }
-        return dp[n];
-    }
 
     private static void test(int[] x){
         x[0] = 123;

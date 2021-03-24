@@ -3,59 +3,69 @@ package com.company.test;
 import com.company.ds.ArrayDequeue;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArrayDequeueTest {
     @Test
-    public void checkAddFirstRemoveFirst(){
+    public void checkAddFirst(){
         ArrayDequeue<Integer> d = new ArrayDequeue<Integer>(10);
-        try {
-            d.addFirst(11);
-            d.addFirst(22);
-        }catch (Exception ex){
-
-        }
-
+        d.addFirst(11);
+        d.addFirst(22);
         assertEquals(d.getCount(),2);
-
-        try {
-            int data = d.removeFirst();
-            assertEquals(data,22);
-
-            int data2 = d.removeFirst();
-            assertEquals(data2,11);
-        }catch (Exception ex){
-
-        }
-
-        //it should throw empty dequeue exception
-        assertThrows(Exception.class, d::removeFirst);
     }
 
     @Test
-    public void checkAddLastRemoveLast(){
+    public void checkRemoveFirst() {
         ArrayDequeue<Integer> d = new ArrayDequeue<Integer>(10);
-        try {
-            d.addLast(11);
-            d.addLast(22);
-        }catch (Exception ex){
+        d.addFirst(11);
+        d.addFirst(22);
 
-        }
+        assertEquals(22,d.removeFirst());
+        assertEquals(11,d.removeFirst());
+    }
 
-        assertEquals(d.getCount(),2);
+    @Test
+    public void addLast() {
+        ArrayDequeue<Integer> d = new ArrayDequeue<Integer>(10);
+        d.addLast(11);
+        d.addLast(22);
 
-        try {
-            int data = d.removeLast();
-            assertEquals(data,22);
+        assertEquals(2,d.getCount());
+    }
 
-            int data2 = d.removeLast();
-            assertEquals(data2,11);
-        }catch (Exception ex){
+    @Test
+    public void removeLast() {
+        ArrayDequeue<Integer> d = new ArrayDequeue<Integer>(10);
+        d.addLast(11);
+        d.addLast(22);
 
-        }
+        assertEquals(22,d.removeLast());
+        assertEquals(11,d.removeLast());
+    }
 
-        //it should throw empty dequeue exception
-        assertThrows(Exception.class, d::removeLast);
+    @Test
+    public void isEmpty(){
+        ArrayDequeue<Integer> d = new ArrayDequeue<Integer>(10);
+        assertTrue(d.isEmpty());
+    }
+
+    @Test
+    public void isNotEmpty(){
+        ArrayDequeue<Integer> d = new ArrayDequeue<Integer>(10);
+        d.addLast(11);
+        assertFalse(d.isEmpty());
+    }
+
+    @Test
+    public void isFull(){
+        ArrayDequeue<Integer> d = new ArrayDequeue<Integer>(1);
+        d.addLast(11);
+        assertTrue(d.isFull());
+    }
+
+    @Test
+    public void isNotFull(){
+        ArrayDequeue<Integer> d = new ArrayDequeue<Integer>(1);
+        assertFalse(d.isFull());
     }
 }

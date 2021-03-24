@@ -4,69 +4,85 @@ import java.util.ArrayDeque;
 
 public class ArrayDequeue<E> {
     private Object[] array;
-    private int front=0,rear=0;
+    private int read=-1,write=-1;
     private int count = 0;
 
     public ArrayDequeue(int size){
         if(size<1){
             throw new IllegalArgumentException();
         }
-        array = new Object[size+1];
+        array = new Object[size];
     }
 
-    public void addLast(E elem) throws Exception{
-        if((rear+1)%array.length == front){
-            throw new Exception("Full Dequeue");
+    public void addLast(E elem){
+        if(isFull()){
+            throw new RuntimeException("Full Dequeue");
         }
-        rear = (rear+1)%array.length;
-        array[rear] = elem;
+
+        if(read == -1){
+            read = 0;
+        }
+
+        write = (write+1) % array.length;
+        array[write] = elem;
         count++;
     }
 
-    public E removeLast() throws Exception{
-        if(rear == front){
-            throw new Exception("Empty Dequeue");
+    public E removeLast(){
+        if(isEmpty()){
+            throw new RuntimeException("Dequeue is empty");
         }
 
-        Object data = array[rear];
-        rear = (rear-1)%array.length;
+        E data = (E) array[write];
         count--;
-        return (E) data;
+
+        if(read==write){
+            read = write = -1;
+        }else{
+            write = (write-1) % array.length;
+        }
+
+        return data;
     }
 
-    public void addFirst(E elem) throws Exception{
-        //set the new front position
-        int tmp = front-1;
-        if(tmp<0){
-            tmp = array.length-1;
+    public void addFirst(E elem){
+        if(isFull()){
+            throw new RuntimeException("Full Dequeue");
         }
 
-        if(tmp==rear){
-            throw new Exception("Dequeue is full");
+        if(isEmpty()){
+            addLast(elem);
+            return;
         }
-        front = tmp;
 
-        array[front] = elem;
+        array[read] = elem;
+        read = read-1 % array.length;
         count++;
     }
 
-    public E removeFirst() throws Exception{
-        if(front==rear){
-            throw new Exception("Empty Dequeue");
+    public E removeFirst(){
+        if(isEmpty()){
+            throw new RuntimeException("Empty Dequeue");
         }
 
-        Object data = array[front];
+        E data = (E) array[read];
 
-        //set the new front position
-        int tmp = front+1;
-        if(tmp>array.length-1){
-            tmp=0;
+        if(read==write){
+            read = write = -1;
+        }else{
+            read = read+1 % array.length;
         }
-        front=tmp;
 
         count--;
+        return data;
+    }
 
-        return (E) data;
+    public boolean isEmpty(){
+        return read==-1 && write==-1;
+    }
+
+    public boolean isFull(){
+        return read == (write+1)%array.length;
     }
 
     public int getCount(){
