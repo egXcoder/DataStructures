@@ -1,8 +1,10 @@
 package com.company.ds;
 
+import com.company.ds.Contracts.Queue;
+
 import java.util.ArrayDeque;
 
-public class ArrayDequeue<E> {
+public class ArrayDequeue<E> implements Queue<E> {
     private Object[] array;
     private int read=-1,write=-1;
     private int count = 0;
@@ -67,7 +69,7 @@ public class ArrayDequeue<E> {
             throw new RuntimeException("Empty Dequeue");
         }
 
-        E data = (E) array[read];
+        E data = peek();
 
         if(read==write){
             read = write = -1;
@@ -89,5 +91,23 @@ public class ArrayDequeue<E> {
 
     public int getCount(){
         return count;
+    }
+
+    @Override
+    public void add(E element) {
+        addLast(element);
+    }
+
+    @Override
+    public E poll() {
+        return removeFirst();
+    }
+
+    @Override
+    public E peek() {
+        if(isEmpty()){
+            throw new RuntimeException("can't peek from empty queue");
+        }
+        return (E) array[read];
     }
 }
