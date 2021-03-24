@@ -4,6 +4,11 @@ public class ArrayQueue<E> {
     private Object[] array;
     private int read=-1,write=-1;
     private int count = 0;
+    private static final int DEFAULT_INITIAL_SIZE = 12;
+
+    public ArrayQueue(){
+        this(DEFAULT_INITIAL_SIZE);
+    }
 
     public ArrayQueue(int size){
         if(size<1){
