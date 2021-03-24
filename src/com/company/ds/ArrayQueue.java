@@ -40,7 +40,7 @@ public class ArrayQueue<E> implements Queue<E> {
             throw new RuntimeException("Queue is empty");
         }
 
-        E data = (E) array[read];
+        E data = peek();
 
         if(read == write){
             read = write = -1;
