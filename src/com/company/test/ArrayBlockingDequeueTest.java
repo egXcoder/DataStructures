@@ -1,7 +1,6 @@
 package com.company.test;
 
 import com.company.ds.ArrayBlockingDequeue;
-import com.company.ds.ArrayBlockingQueue;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
